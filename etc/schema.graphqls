@@ -1,12 +1,12 @@
 type Query {
-    customerRecommendationLists: [RecommendationList] @doc(description: "Return friend recommendation lists for the customer")
+    customerRecommendationLists: [RecommendationList] @doc(description: "Return friend recommendation lists for the customer") @resolver(class: "\\SwiftOtter\\FriendRecommendations\\Model\\Resolver\\CustomerRecommendationLists")
 }
 
 type RecommendationList {
     friendName: String! @doc(description: "Name of the friend who made the recommendation list")
     title: String @doc(description: "List title")
     note: String @doc(description: "Friend's note")
-    products: [RecommendationListProduct!] @doc(description: "List of products on the recommendation list")
+    products: [RecommendationListProduct!] @doc(description: "List of products on the recommendation list") @resolver(class: "\\SwiftOtter\\FriendRecommendations\\Model\\Resolver\\CustomerRecommendationLists\\ProductsBatch")
 }
 
 type RecommendationListProduct {
@@ -22,7 +22,7 @@ type Mutation {
         title: String @doc(description: "List title")
         note: String @doc(description: "Personal note")
         productSkus: [String!]! @doc(description: "List of SKUs being recommended")
-    ): RecommendationListSaved! @doc(description: "Create a friend recommendation list")
+    ): RecommendationListSaved! @doc(description: "Create a friend recommendation list") @resolver(class: "\\SwiftOtter\\FriendRecommendations\\Model\\Resolver\\CreateRecommendationList")
 }
 
 type RecommendationListSaved {
